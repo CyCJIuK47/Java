@@ -1,0 +1,6 @@
+testInt =1
+testInteger =2
+someString=1
+thereIsNoSuchProperty=someValue
+testStringWithoutProperty=abc
+date=29.11.2022 18:30

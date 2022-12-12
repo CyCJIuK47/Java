@@ -1,0 +1,5 @@
+testInt =1
+testInteger =2
+someString=1
+testStringWithoutProperty=abc
+date=29_11_2022 18:30
