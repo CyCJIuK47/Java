@@ -1,0 +1,12 @@
+<menu>
+    <li>
+        <form action="userList">
+            <input type="submit" value="Get All Users" />
+        </form>
+    </li>
+    <li>
+      <form action="logout">
+          <input type="submit" value="Logout" />
+      </form>
+    </li>
+</menu>
