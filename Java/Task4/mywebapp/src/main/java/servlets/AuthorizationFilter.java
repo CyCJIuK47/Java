@@ -22,12 +22,12 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         // deny access to any page if user is not logged in, except login page and login servlet
-        if (req.getRequestURI().equals("/mywebapp/") ||
-                req.getRequestURI().startsWith("/mywebapp/login") ||
+        if (req.getRequestURI().equals(req.getServletContext().getContextPath() + "/") ||
+                req.getRequestURI().startsWith(req.getServletContext().getContextPath() + "/login") ||
                 req.getSession().getAttribute("user") != null) {
             chain.doFilter(request, response);
         } else {
-            resp.sendError(404);
+            resp.sendRedirect(req.getContextPath());
         }
     }
 
