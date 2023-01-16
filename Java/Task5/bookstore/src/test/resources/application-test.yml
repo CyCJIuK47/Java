@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/bookstoretestdb?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password:
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 60000
+server:
+  error:
+    include-message: always
+    include-stacktrace: never
