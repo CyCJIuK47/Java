@@ -30,7 +30,6 @@ public class AuthorController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public RestResponse createAuthor(@Valid @RequestBody AuthorSaveDto authorSaveDto) {
-        System.out.println(authorSaveDto);
         int id = authorService.createAuthor(authorSaveDto);
         return new RestResponse(String.valueOf(id));
     }
