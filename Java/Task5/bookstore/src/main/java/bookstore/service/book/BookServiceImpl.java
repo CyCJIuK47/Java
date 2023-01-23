@@ -7,6 +7,7 @@ import bookstore.dto.book.BookQueryDto;
 import bookstore.dto.book.BookSaveDto;
 import bookstore.exceptions.NotFoundException;
 import bookstore.model.Book;
+import bookstore.service.author.AuthorService;
 import bookstore.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,15 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
 
+    @Autowired
+    private AuthorService authorService;
+
     @Override
     public int createBook(BookSaveDto bookSaveDto) {
         Book book = new Book();
         updateModelFromDto(book, bookSaveDto);
+        // check if author exists
+        authorService.getAuthor(book.getAuthorId());
         return bookDao.save(book);
     }
 

@@ -126,6 +126,28 @@ class BookControllerTest {
     }
 
     @Test
+    void createBookWithUnknownAuthorFailed() throws Exception {
+
+        String title = "Kaminnyj hospodar";
+        int pages = 150;
+        int year = 1883;
+        int authorId = 100;
+        String body = """
+          {
+              "title": "%s",
+              "pages": %d,
+              "year": %d,
+              "authorId": %d
+          }
+        """.formatted(title, pages, year, authorId);
+        mockMvc.perform(post("/api/books")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body)
+                )
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void getBookSuccess() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/api/books/1"))
                 .andExpect(status().isOk())
