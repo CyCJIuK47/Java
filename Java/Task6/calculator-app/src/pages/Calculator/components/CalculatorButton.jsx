@@ -8,6 +8,7 @@ const CalculatorButton = ({text, onClick, xs=3}) => {
             <Button
             fullWidth
             onClick={onClick}
+            variant="outlined"
             >
                 {text}
             </Button>
