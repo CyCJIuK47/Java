@@ -20,16 +20,16 @@ const DIVISION_BY_ZERO = "Error division by zero";
 const calculate = (leftOperand, rightOperand, operator) => {
     switch (operator) {
         case '+' :
-            return Number(leftOperand) + Number(rightOperand);
+            return leftOperand + rightOperand;
         case '-' :
-            return Number(leftOperand) - Number(rightOperand);
+            return leftOperand - rightOperand;
         case '*' :
-            return Number(leftOperand) * Number(rightOperand);
+            return leftOperand * rightOperand;
         case '/' :
-            if (Number(rightOperand) === 0) {
+            if (rightOperand === 0) {
                 return DIVISION_BY_ZERO;
             }
-            return Number(leftOperand) / Number(rightOperand);
+            return leftOperand / rightOperand;
     }
 }
 
@@ -59,9 +59,9 @@ export default (state = initialState, action) => {
         case ADD_DIGIT: {
             const newState = {...state};
             if (operator === null) {
-                newState.leftOperand = Number(leftOperand) * 10 + action.payload;
+                newState.leftOperand = leftOperand * 10 + action.payload;
             } else {
-                newState.rightOperand = Number(rightOperand) * 10 + action.payload;
+                newState.rightOperand = rightOperand * 10 + action.payload;
             }
             return newState;
         }
