@@ -1,0 +1,41 @@
+{
+  "cancel": "Cancel",
+  "language": "Language",
+  "login": "Login",
+  "logout": "Logout",
+  "page.login": "Login",
+  "page.initial": "Main",
+  "password": "Password",
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+
+  "back.to.main.page": "Back to main page",
+
+  "create": "Create",
+  "update": "Update",
+  "edit": "Edit",
+  "delete": "Delete",
+  "back": "Back",
+  "cancel": "Cancel",
+
+  "success": "Success.",
+  "error": "Error.",
+
+  "book": "Book",
+  "title": "Title",
+  "author": "Author",
+  "year": "Year",
+  "pages": "Pages",
+  "book.create": "Create book",
+  "book.card.pages": "pages",
+  "book.card.year": "year",
+
+  "book.delete.success": "Book successfully deleted.",
+  "book.delete.failed": "Book delete failed:",
+
+  "book.update.success": "Book successfully updated.",
+  "book.update.failed": "Book delete failed:",
+
+  "book.create.success": "Book successfully created.",
+  "book.create.failed": "Book delete failed:"
+}

@@ -1,0 +1,41 @@
+{
+  "cancel": "Скасувати",
+  "language": "Мова",
+  "login": "Увійти",
+  "logout": "Вийти",
+  "page.login": "Логін",
+  "page.initial": "Головна",
+  "password": "Пароль",
+  "signIn": "Ввійти",
+  "signUp": "Зареєструватися",
+
+  "back.to.main.page": "Повернутись на головну сторінку",
+
+  "success": "Успішно.",
+  "error": "Помилка.",
+
+  "create": "Створити",
+  "update": "Оновити",
+  "edit": "Редагувати",
+  "delete": "Видалити",
+  "back": "Повернутись",
+  "cancel": "Відмінити",
+
+  "book": "Книга",
+  "title": "Назва",
+  "author": "Автор",
+  "year": "Рік",
+  "pages": "Сторінки",
+  "book.create": "Створити книгу",
+  "book.card.pages": "сторінок",
+  "book.card.year": "року",
+
+  "book.delete.success": "Книга успішно видалена.",
+  "book.delete.failed": "Не вдалося видалити книгу:",
+
+  "book.update.success": "Книга успішно оновлена.",
+  "book.update.failed": "Не вдалося оновити книгу:",
+
+  "book.create.success": "Книга успішно створена.",
+  "book.create.failed": "Не вдалося створити книгу:"
+}
