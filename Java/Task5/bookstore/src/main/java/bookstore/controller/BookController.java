@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin
 public class BookController {
 
     @Autowired
@@ -36,11 +37,8 @@ public class BookController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<BookDetailsDto> getAll(@RequestBody Pagination pagination) {
-        if (pagination == null) {
-            pagination = new Pagination(0, 50);
-        }
-        return bookService.getAll(pagination);
+    public List<BookDetailsDto> getAll() {
+        return bookService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -50,13 +48,15 @@ public class BookController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateBook(@Valid @PathVariable int id, @RequestBody BookSaveDto bookSaveDto) {
+    public RestResponse updateBook(@PathVariable int id, @Valid @RequestBody BookSaveDto bookSaveDto) {
         bookService.updateBook(id, bookSaveDto);
+        return new RestResponse(String.valueOf(true));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable int id) {
+    public RestResponse deleteBook(@PathVariable int id) {
         bookService.deleteBook(id);
+        return new RestResponse(String.valueOf(true));
     }
 
     @GetMapping("/search")

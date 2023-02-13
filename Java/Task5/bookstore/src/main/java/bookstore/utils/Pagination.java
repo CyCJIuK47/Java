@@ -11,6 +11,6 @@ import lombok.extern.jackson.Jacksonized;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pagination {
-    private int offset = 0;
-    private int limit = 50;
+    private int offset;
+    private int limit;
 }

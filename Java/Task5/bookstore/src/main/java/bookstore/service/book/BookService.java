@@ -20,7 +20,7 @@ public interface BookService {
 
     List<BookInfoDto> search(BookQueryDto bookQueryDto);
 
-    List<BookDetailsDto> getAll(Pagination pagination);
+    List<BookDetailsDto> getAll();
 }
 
 

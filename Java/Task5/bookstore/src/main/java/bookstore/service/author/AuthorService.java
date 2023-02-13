@@ -20,7 +20,7 @@ public interface AuthorService {
 
     List<AuthorInfoDto> search(AuthorQueryDto authorQueryDto);
 
-    List<AuthorDetailsDto> getAll(Pagination pagination);
+    List<AuthorDetailsDto> getAll();
 }
 
 

@@ -56,8 +56,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDetailsDto> getAll(Pagination pagination) {
-        return authorDao.getAll(pagination).stream()
+    public List<AuthorDetailsDto> getAll() {
+        return authorDao.getAll().stream()
                 .map(this::convertToDetailsDto)
                 .toList();
     }

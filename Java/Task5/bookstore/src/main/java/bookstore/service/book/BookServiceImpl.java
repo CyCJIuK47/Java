@@ -61,8 +61,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDetailsDto> getAll(Pagination pagination) {
-        return bookDao.getAll(pagination).stream()
+    public List<BookDetailsDto> getAll() {
+        return bookDao.getAll().stream()
                 .map(this::convertToDetailsDto)
                 .toList();
     }

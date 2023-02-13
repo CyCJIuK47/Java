@@ -16,7 +16,7 @@ public interface BookDao {
 
     void deleteById(int id);
 
-    List<Book> getAll(Pagination pagination);
+    List<Book> getAll();
 
     List<Book> search(String title, int authorId, Pagination pagination);
 }

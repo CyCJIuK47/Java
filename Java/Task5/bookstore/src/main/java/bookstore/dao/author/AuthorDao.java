@@ -17,7 +17,7 @@ public interface AuthorDao {
 
     void deleteById(int id);
 
-    List<Author> getAll(Pagination pagination);
+    List<Author> getAll();
 
     List<Author> search(String surname, String country, Pagination pagination);
 }

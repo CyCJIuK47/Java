@@ -23,6 +23,6 @@ public class BookSaveDto {
     @Min(value = 1000, message = "year must be greater than 1000")
     private int year;
 
-    @Min(value = 1, message = "authorId must be greater than 1")
+    @Min(value = 1, message = "authorId must be greater than 0")
     private int authorId;
 }

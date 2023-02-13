@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/authors")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin
 public class AuthorController {
 
     @Autowired
@@ -36,11 +37,8 @@ public class AuthorController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<AuthorDetailsDto> getAll(@RequestBody Pagination pagination) {
-        if (pagination == null) {
-            pagination = new Pagination(0, 50);
-        }
-        return authorService.getAll(pagination);
+    public List<AuthorDetailsDto> getAll() {
+        return authorService.getAll();
     }
 
     @GetMapping("/{id}")

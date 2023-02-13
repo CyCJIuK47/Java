@@ -82,10 +82,10 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao {
     }
 
     @Override
-    public List<Author> getAll(Pagination pagination) {
-        String query = "select id, name, surname, country from author limit ?, ?";
+    public List<Author> getAll() {
+        String query = "select id, name, surname, country from author";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[] {pagination.getOffset(), pagination.getLimit()};
+        Object[] args = new Object[] {};
 
         List<Author> authorList = jdbcTemplate.query(query, new AuthorRowMapper(), args);
         return authorList;
@@ -105,7 +105,7 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao {
         }
 
         // if no filters provided - return all
-        return getAll(pagination);
+        return getAll();
     }
 
     private List<Author> searchBySurname(String surname, Pagination pagination) {

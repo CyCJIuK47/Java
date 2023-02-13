@@ -83,10 +83,10 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
     }
 
     @Override
-    public List<Book> getAll(Pagination pagination) {
-        String query = "select id, title, pages, year, id_author from book limit ?, ?";
+    public List<Book> getAll() {
+        String query = "select id, title, pages, year, id_author from book";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[] {pagination.getOffset(), pagination.getLimit()};
+        Object[] args = new Object[] {};
 
         List<Book> bookList = jdbcTemplate.query(query, new BookRowMapper(), args);
         return bookList;
@@ -106,7 +106,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
         }
 
         // if no filters provided - return all
-        return getAll(pagination);
+        return getAll();
     }
 
     private List<Book> searchByTitle(String title, Pagination pagination) {
