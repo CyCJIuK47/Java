@@ -10,6 +10,8 @@
   "signUp": "Sign up",
 
   "content.not.available": "Nothing to show.",
+  "default.error.message": "Ooops... Something went wrong",
+  "data.loading.error": "Data loading is failed",
 
   "back.to.main.page": "Back to main page",
 

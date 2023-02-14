@@ -10,6 +10,9 @@
   "signUp": "Зареєструватися",
 
   "content.not.available": "Нема чого показати.",
+  "default.error.message": "Упсс... Щось пішло не так",
+  "data.loading.error": "Не вдалося загрузити дані",
+
 
   "back.to.main.page": "Повернутись на головну сторінку",
 
