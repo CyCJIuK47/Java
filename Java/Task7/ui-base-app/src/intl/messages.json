@@ -9,6 +9,8 @@
   "signIn": "Sign in",
   "signUp": "Sign up",
 
+  "content.not.available": "Nothing to show.",
+
   "back.to.main.page": "Back to main page",
 
   "create": "Create",
@@ -37,5 +39,7 @@
   "book.update.failed": "Book delete failed:",
 
   "book.create.success": "Book successfully created.",
-  "book.create.failed": "Book delete failed:"
+  "book.create.failed": "Book delete failed:",
+
+  "book.list": "Book list"
 }

@@ -9,6 +9,8 @@
   "signIn": "Ввійти",
   "signUp": "Зареєструватися",
 
+  "content.not.available": "Нема чого показати.",
+
   "back.to.main.page": "Повернутись на головну сторінку",
 
   "success": "Успішно.",
@@ -37,5 +39,7 @@
   "book.update.failed": "Не вдалося оновити книгу:",
 
   "book.create.success": "Книга успішно створена.",
-  "book.create.failed": "Не вдалося створити книгу:"
+  "book.create.failed": "Не вдалося створити книгу:",
+
+  "book.list": "Список книг"
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useChangePage from 'hooks/useChangePage';
+import useLocationSearch from 'hooks/useLocationSearch';
 import BookCard from 'components/BookCard';
 import Button from 'components/Button';
 import { useIntl } from 'react-intl';
@@ -32,6 +33,7 @@ const BookList = ({ authorities }) => {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const dispatch = useDispatch();
+    const locationSearch = useLocationSearch();
     const changePage = useChangePage();
 
     const [authorsMap, setAuthorsMap] = useState({});
@@ -86,7 +88,7 @@ const BookList = ({ authorities }) => {
 
     return (
     <>
-        { Object.keys(authorsMap).length &&
+        { Object.keys(authorsMap).length !==0 &&
         (<Grid container justify="space-around" spacing={2} >
             <Grid container item xs={12} spacing={2}>
 
@@ -95,7 +97,8 @@ const BookList = ({ authorities }) => {
                     fullWidth
                     color="secondary"
                     variant="outlined"
-                    onClick={() => changePage({ path: `/${PAGES.INITIAL}` })}
+                    onClick={() => changePage({ locationSearch: locationSearch,
+                                                path: `/${PAGES.INITIAL}` })}
                     >
                         {formatMessage({
                               id: 'back.to.main.page',
@@ -107,7 +110,8 @@ const BookList = ({ authorities }) => {
                     variant="outlined"
                     fullWidth
                     color="primary"
-                    onClick={() => changePage({ path: `/${PAGES.BOOK_EDIT}` })}
+                    onClick={() => changePage({ locationSearch: locationSearch,
+                                                path: `/${PAGES.BOOK_EDIT}` })}
                     > {formatMessage({
                           id: 'book.create',
                       })} </Button>)}

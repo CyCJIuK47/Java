@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
+import useLocationSearch from 'hooks/useLocationSearch';
 import useChangePage from 'hooks/useChangePage';
 import Link from 'components/Link';
 import Typography from 'components/Typography';
@@ -34,9 +36,10 @@ const Initial = ({
     neededAuthorities: ['READ'],
   });
 
-
-
+  const locationSearch = useLocationSearch();
   const changePage = useChangePage();
+
+  const { formatMessage } = useIntl();
 
   return (
     <div className={classes.container}>
@@ -63,15 +66,19 @@ const Initial = ({
       {
         <Button
         variant="outlined"
-        onClick={() => changePage({ path: `/${PAGES.BOOK_LIST}` })}
+        onClick={() => changePage({locationSearch: locationSearch,  path: `/${PAGES.BOOK_LIST}` })}
         >
-            BookList
+            {formatMessage({
+                id: 'book.list',
+            })}
         </Button>
       }
 
       {!canSeeList && (
         <Typography>
-          Не могу ничего показать :(
+           {formatMessage({
+                 id: 'content.not.available',
+            })}
         </Typography>
       )}
     </div>

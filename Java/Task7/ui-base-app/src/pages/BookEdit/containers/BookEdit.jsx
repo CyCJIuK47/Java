@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Grid from 'components/Grid';
 import useChangePage from 'hooks/useChangePage';
+import useLocationSearch from 'hooks/useLocationSearch';
 import Container from 'components/Container';
 import Button from 'components/Button';
 import Divider from 'components/Divider';
@@ -40,6 +41,8 @@ const BookEdit = ({ authorities }) => {
     });
 
     const { formatMessage } = useIntl();
+    const locationSearch = useLocationSearch();
+    const changePage = useChangePage();
 
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -94,7 +97,6 @@ const BookEdit = ({ authorities }) => {
 
     const [authorsMap, setAuthorsMap] = useState({});
 
-    const changePage = useChangePage();
 
     useEffect(() => {
         if (authors.list.length) {
@@ -233,7 +235,8 @@ const BookEdit = ({ authorities }) => {
                         color="secondary"
                           variant="outlined"
                           fullWidth
-                          onClick={() => changePage({ path: `/${PAGES.BOOK_LIST}` })}
+                          onClick={() => changePage({ locationSearch: locationSearch,
+                                                      path: `/${PAGES.BOOK_LIST}` })}
                         >
                          {formatMessage({
                              id: 'back',
