@@ -5,7 +5,7 @@ import useChangePage from 'hooks/useChangePage';
 import BookCard from 'components/BookCard';
 import Button from 'components/Button';
 import { useIntl } from 'react-intl';
-import Grid from '@material-ui/core/Grid';
+import Grid from 'components/Grid';
 import { fetchBooks, fetchBookDelete, removeBookFromPage, resetBookDelete, resetBooks } from 'app/actions/book';
 import { fetchAuthors, resetAuthors } from 'app/actions/author';
 import * as PAGES from 'constants/pages';

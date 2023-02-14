@@ -1,6 +1,6 @@
 const initialState = {
   availableItems: [
-    'how+to+lear+js',
+    'how+to+learn+js',
     'somePath',
     'Картинка',
     'anotherPath',
