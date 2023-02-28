@@ -1,0 +1,10 @@
+elasticsearch:
+  address: localhost:9200
+
+spring:
+  servlet:
+    max-content-length: 50MB
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
