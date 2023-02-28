@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import elastic.model.Person;
 import elastic.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,12 +15,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.zip.ZipInputStream;
 
 @Service
 public class DbRefreshService {
 
-    private static final int BATCH_SIZE = 2048;
+    @Value("${elasticsearch.bulk-batch}")
+    private int BATCH_SIZE;
+
+    @Value("${threads.pool.size}")
+    private int threadsPoolSize;
 
     @Autowired
     private PersonRepository personRepository;
@@ -33,6 +40,7 @@ public class DbRefreshService {
         personRepository.deleteAll();
 
         try(ZipInputStream zipInputStream = new ZipInputStream(zipFile.getInputStream())) {
+            ExecutorService executorService = Executors.newFixedThreadPool(threadsPoolSize);
 
             zipInputStream.getNextEntry();
             ObjectMapper objectMapper = new ObjectMapper(new JsonFactory());
@@ -50,9 +58,14 @@ public class DbRefreshService {
                         Person person = objectMapper.readValue(jsonParser, Person.class);
                         persons.add(person);
                     }
+                    executorService.execute(() -> elasticsearchOperations.save(
+                            persons, elasticsearchOperations.getIndexCoordinatesFor(Person.class)
+                    ));
 
-                    elasticsearchOperations.save(persons, elasticsearchOperations.getIndexCoordinatesFor(Person.class));
                 }
+            }
+            finally {
+                executorService.shutdown();
             }
         }
     }

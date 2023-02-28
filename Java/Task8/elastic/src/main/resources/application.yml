@@ -1,5 +1,10 @@
 elasticsearch:
   address: localhost:9200
+  bulk-batch: 2048
+
+threads:
+  pool:
+    size: 4
 
 spring:
   servlet:
