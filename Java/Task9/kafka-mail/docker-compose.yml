@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    healthcheck:
+       test: ["CMD", "nc", "-vz", "zookeeper", "2181"]
+       interval: 10s
+       timeout: 5s
+       retries: 10
+       start_period: 10s
+    networks:
+      - app-net
+
+  kafka:
+    image: 'bitnami/kafka:latest'
+    container_name: kafka
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+    networks:
+      - app-net
+
+  mongo:
+    image: mongo:5.0.14
+    container_name: 'mongo-db'
+    ports:
+      - "27017:27017"
+    healthcheck:
+       test: echo 'db.stats().ok' | mongo mongo:27017/test --quiet
+       interval: 10s
+       timeout: 10s
+       retries: 5
+       start_period: 30s
+    networks:
+      - app-net
+
+
+  mail-service:
+    build:
+      context: .
+    container_name: mail-service
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      kafka:
+        condition: service_started
+      mongo:
+        condition: service_healthy
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge

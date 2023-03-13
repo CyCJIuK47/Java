@@ -1,0 +1,58 @@
+server:
+  error:
+    include-message: always
+    include-stacktrace: never
+    include-binding-errors: always
+
+spring:
+
+  application:
+    name: kafka-mail
+
+  scheduling:
+    enabled: true
+    dbscan.rate.ms: 18000000
+
+  data:
+    mongodb:
+      uri: mongodb://${hosts.mongo}:27017/mails
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${user.gmail.login}
+    password: ${user.gmail.password}
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
+
+  kafka:
+    bootstrap-servers: ${hosts.kafka}:9092
+
+    consumer:
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: kafkamail.*
+
+    producer:
+      client-id: ${spring.application.name}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+kafka:
+  topic:
+    mailReceived: mailReceived
+
+user:
+  gmail:
+    login: login
+    password: password
+
+hosts:
+  mongo: localhost
+  kafka: localhost
