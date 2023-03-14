@@ -17,7 +17,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -28,6 +35,7 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 @SpringBootTest(classes = KafkaMailApplication.class)
 @ExtendWith(SpringExtension.class)
+@Testcontainers
 class SendMailServiceTests {
 
     @MockBean
@@ -44,6 +52,17 @@ class SendMailServiceTests {
 
     @Autowired
     private MailRepository mailRepository;
+
+    @Container
+    private static MongoDBContainer mongoDBContainer =
+            new MongoDBContainer(DockerImageName.parse("mongo:5.0.14"))
+                    .withReuse(true)
+                    .waitingFor(Wait.forLogMessage(".*Waiting for connections.*\\n", 1));
+
+    @DynamicPropertySource
+    static void mongoDbProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
+    }
 
 
     @AfterEach

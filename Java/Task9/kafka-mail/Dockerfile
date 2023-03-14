@@ -1,4 +1,4 @@
-FROM openjdk:17 AS buildArtifact
+FROM openjdk:17-alpine AS buildArtifact
 
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
@@ -9,9 +9,9 @@ ADD mvnw $HOME
 ADD src $HOME/src
 ADD pom.xml $HOME
 
-RUN ./mvnw clean package
+RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:17 AS layeredBuilder
+FROM openjdk:17-alpine AS layeredBuilder
 
 ENV HOME=/usr/app
 WORKDIR $HOME
@@ -19,7 +19,7 @@ WORKDIR $HOME
 COPY --from=buildArtifact $HOME/target/*.jar application.jar
 RUN java -Djarmode=layertools -jar --enable-preview application.jar extract
 
-FROM openjdk:17
+FROM openjdk:17-alpine
 
 ENV HOME=/usr/app
 WORKDIR $HOME
