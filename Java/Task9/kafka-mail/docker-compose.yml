@@ -29,7 +29,14 @@ services:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server=kafka:9092 --list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     networks:
       - app-net
 
@@ -43,7 +50,7 @@ services:
        interval: 10s
        timeout: 10s
        retries: 5
-       start_period: 30s
+       start_period: 10s
     networks:
       - app-net
 
@@ -57,7 +64,7 @@ services:
     env_file: .env
     depends_on:
       kafka:
-        condition: service_started
+        condition: service_healthy
       mongo:
         condition: service_healthy
     networks:
