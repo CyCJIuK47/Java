@@ -38,12 +38,6 @@ import static org.mockito.Mockito.*;
 @Testcontainers
 class SendMailServiceTests {
 
-    @MockBean
-    private MailReceivedListener mailReceivedListener;
-
-    @MockBean
-    private MailRegistrationService mailRegistrationService;
-
     @MockBean(answer = Answers.RETURNS_DEEP_STUBS)
     private JavaMailSender mailSender;
 
